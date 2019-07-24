@@ -1,0 +1,89 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: expenses-app
+  generation: 1
+  labels:
+    name: expenses-app
+    app: expenses
+    chart: expenses-0.1.0
+    heritage: Tiller
+    release: expensesmanager
+  namespace: default
+spec:
+  componentKinds:
+    - group: core
+      kind: Pods
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - expenses
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: expenses-app
+  labels:
+    app: expenses
+    chart: expenses-0.1.0
+    destinationKind: Deployable
+    destinationName: expenses-app
+    heritage: Tiller
+    release: expensesmanager
+    sourceKind: Application
+    sourceName: expenses-app
+  namespace: default
+spec:
+  destination:
+    name: expenses-app
+    kind: Deployable
+  source:
+    name: expenses-app
+    kind: Application
+  type: contains
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: expenses-app-slave
+  labels:
+    app: expenses
+    chart: expenses-0.1.0
+    destinationKind: Deployable
+    destinationName: expenses-app-slave
+    heritage: Tiller
+    release: expensesmanager
+    sourceKind: Application
+    sourceName: expenses-app
+  namespace: default
+spec:
+  destination:
+    name: expenses-app-slave
+    kind: Deployable
+  source:
+    name: expenses-app
+    kind: Application
+  type: contains
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: expenses-app
+  labels:
+    name: expenses-app
+    app: expenses
+    chart: expenses-0.1.0
+    heritage: Tiller
+    release: expensesmanager
+    servicekind: ApplicationService
+  namespace: default
+spec:
+  deployer:
+    helm:
+      chartURL: >-
+        https://github.com/luizhmcarvalho/helm-repos/blob/master/expenses-0.1.0.tgz?raw=true
+      namespace: default
+    kind: helm

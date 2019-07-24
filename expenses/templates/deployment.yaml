@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "expensesmanager.fullname" . }}
+  labels:
+    app: {{ template "expensesmanager.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "expensesmanager.name" . }}
+        release: {{ .Release.Name }}
+        tier: expensesmanager
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.expensesmanager.repository }}:{{ .Values.expensesmanager.tag }}"
+          imagePullPolicy: {{ .Values.expensesmanager.pullPolicy }}
+          ports:
+            - containerPort: 80
+          env:
+          - name: GET_HOSTS_FROM
+            value: dns
+ 

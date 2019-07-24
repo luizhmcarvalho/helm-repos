@@ -1,0 +1,8 @@
+replicaCount: 1
+service:
+  type: NodePort
+
+expensesmanager:
+  repository: hub.docker.com/r/nexotecnologiabr/nexo_php
+  tag: latest
+  pullPolicy: IfNotPresent

@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Helm Chart Kubernets.
+name: nexo_php
+version: 0.1.0
