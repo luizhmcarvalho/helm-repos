@@ -97,7 +97,7 @@ metadata:
     app: expenses
     chart: expenses-0.1.0
     heritage: Tiller
-    release: expenses-app
+    release: expenses
     servicekind: CacheService
   namespace: default
 spec:
