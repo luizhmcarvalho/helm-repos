@@ -8,7 +8,7 @@ metadata:
     app: expenses
     chart: expenses-0.1.0
     heritage: Tiller
-    release: expensesmanager
+    release: expenses
   namespace: default
 spec:
   componentKinds:
@@ -32,7 +32,7 @@ metadata:
     destinationKind: Deployable
     destinationName: expenses-app
     heritage: Tiller
-    release: expensesmanager
+    release: expenses
     sourceKind: Application
     sourceName: expenses-app
   namespace: default
@@ -55,7 +55,7 @@ metadata:
     destinationKind: Deployable
     destinationName: expenses-app-slave
     heritage: Tiller
-    release: expensesmanager
+    release: expenses
     sourceKind: Application
     sourceName: expenses-app
   namespace: default
@@ -77,13 +77,13 @@ metadata:
     app: expenses
     chart: expenses-0.1.0
     heritage: Tiller
-    release: expensesmanager
+    release: expenses
     servicekind: ApplicationService
   namespace: default
 spec:
   deployer:
     helm:
       chartURL: >-
-        https://github.com/luizhmcarvalho/helm-repos/blob/master/expenses-0.1.0.tgz?raw=true
+        https://raw.githubusercontent.com/luizhmcarvalho/helm-repos/master/expenses-0.1.0.tgz
       namespace: default
     kind: helm

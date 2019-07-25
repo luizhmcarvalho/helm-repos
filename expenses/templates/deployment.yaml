@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "expensesmanager.fullname" . }}
+  name: {{ template "expenses.fullname" . }}
   labels:
-    app: {{ template "expensesmanager.name" . }}
+    app: {{ template "expenses.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,14 +12,14 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "expensesmanager.name" . }}
+        app: {{ template "expenses.name" . }}
         release: {{ .Release.Name }}
-        tier: expensesmanager
+        tier: expenses
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.expensesmanager.repository }}:{{ .Values.expensesmanager.tag }}"
-          imagePullPolicy: {{ .Values.expensesmanager.pullPolicy }}
+          image: "{{ .Values.expenses.repository }}:{{ .Values.expenses.tag }}"
+          imagePullPolicy: {{ .Values.expenses.pullPolicy }}
           ports:
             - containerPort: 80
           env:
